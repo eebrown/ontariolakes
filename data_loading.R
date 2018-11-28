@@ -13,6 +13,7 @@ loadPhosData <- function() {
     
     # Convert numeric data to numeric and remove bad data.
     phos_data$TP1 <- as.numeric(phos_data$TP1) # numeric data
+    phos_data$TP2 <- as.numeric(phos_data$TP2)
     phos_data <- phos_data[!is.na(phos_data$TP1),] # clean up data by removing entries with invalid TP1
     
     # Convert coded data to machine-readable formats.
@@ -47,6 +48,9 @@ loadCalData <- function() {
     cal_data$Lon <- as.numeric(lapply(cal_data$Lon, formatDMS))
     cal_data$Lon <- cal_data$Lon * -1 #Given we are in Western hemisphere
     cal_data$Lat <- as.numeric(lapply(cal_data$Lat, formatDMS))
+    
+    # Convert coded data to machine-readable formats.
+    cal_data$Date <- as.Date(cal_data$Date, "%d-%b-%y") #convert to standardized machine-readable date format
     
     return(cal_data)
 }
